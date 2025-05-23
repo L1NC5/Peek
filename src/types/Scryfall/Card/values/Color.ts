@@ -1,5 +1,7 @@
 /**
- * The game's existing colors
+ * Object defining all possible colors
+ *
+ * @see {@link ScryfallColorType} for the type of this group
  */
 export const ScryfallColor = {
   White: 'W',
@@ -10,4 +12,9 @@ export const ScryfallColor = {
   Colorless: 'C',
 } as const
 
-export type ScryfallColor = (typeof ScryfallColor)[keyof typeof ScryfallColor]
+/**
+ * Type defining all possible colors
+ *
+ * @see {@link ScryfallColor} for an array version
+ */
+export type ScryfallColorType = (typeof ScryfallColor)[keyof typeof ScryfallColor]

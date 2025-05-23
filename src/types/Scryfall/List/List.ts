@@ -1,4 +1,7 @@
-import type { ScryfallObject } from '@/types/Scryfall/Object'
+import type {
+  ScryfallObject,
+  ScryfallObjectType,
+} from '@/types/Scryfall/Object'
 
 export type ScryfallList = {
   /**
@@ -8,7 +11,7 @@ export type ScryfallList = {
   /**
    *  An array of the requested objects, in a specific order.
    */
-  data: Array<ScryfallObject>
+  data: Array<ScryfallObjectType>
   /**
    *  True if this List is paginated and there is a page beyond the current page.
    */

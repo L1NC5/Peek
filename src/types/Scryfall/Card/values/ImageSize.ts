@@ -1,3 +1,8 @@
+/**
+ * Object defining all possible image sizes
+ *
+ * @see {@link ScryfallImageSizeType} for the type of this group
+ */
 export const ScryfallImageSize = {
   /**
    * A small image.
@@ -56,5 +61,10 @@ export const ScryfallImageSize = {
   BorderCrop: 'border_crop',
 } as const
 
-export type ScryfallImageSize =
+/**
+ * Type defining all possible object types in the Scryfall API
+ *
+ * @see {@link ScryfallImageSize} for an array version
+ */
+export type ScryfallImageSizeType =
   (typeof ScryfallImageSize)[keyof typeof ScryfallImageSize]

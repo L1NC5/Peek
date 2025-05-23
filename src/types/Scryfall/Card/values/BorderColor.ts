@@ -1,5 +1,7 @@
 /**
  * The border color of a print, not a reference to gameplay rules.
+ *
+ * @see {@link ScryfallBorderColorType} for the type of this group
  */
 export const ScryfallBorderColor = {
   Black: 'black',
@@ -9,5 +11,10 @@ export const ScryfallBorderColor = {
   Gold: 'gold',
 } as const
 
-export type ScryfallBorderColor =
+/**
+ * Type defining all possible border colors in the Scryfall API
+ *
+ * @see {@link ScryfallBorderColor} for an array version
+ */
+export type ScryfallBorderColorType =
   (typeof ScryfallBorderColor)[keyof typeof ScryfallBorderColor]

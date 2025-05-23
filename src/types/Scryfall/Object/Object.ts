@@ -1,5 +1,7 @@
 /**
- * Type defining all possible object types in the Scryfall API
+ * Object defining all possible object types in the Scryfall API
+ *
+ * @see {@link ScryfallObjectType} for the type of this group
  */
 export const ScryfallObject = {
   Card: 'card',
@@ -15,5 +17,10 @@ export const ScryfallObject = {
   Set: 'set',
 } as const
 
-export type ScryfallObject =
+/**
+ * Type defining all possible object types in the Scryfall API
+ *
+ * @see {@link ScryfallObject} for an array version
+ */
+export type ScryfallObjectType =
   (typeof ScryfallObject)[keyof typeof ScryfallObject]

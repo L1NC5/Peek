@@ -1,7 +1,8 @@
 import type { ScryfallObject } from '@/types/Scryfall/Object'
 import type {
-  ScryfallColor,
-  ScryfallImageUris,
+  ScryfallColorType,
+  ScryfallImageUrisType,
+  ScryfallLayoutType,
 } from '@/types/Scryfall/Card/values'
 
 /**
@@ -23,11 +24,11 @@ export type ScryfallCardFace = {
   /**
    *  The colors in this face’s color indicator, if any.
    */
-  color_indicator?: Array<ScryfallColor>
+  color_indicator?: Array<ScryfallColorType>
   /**
    *  This face’s colors, if the game defines colors for the individual face of this card.
    */
-  colors?: Array<ScryfallColor>
+  colors?: Array<ScryfallColorType>
   /**
    *  This face’s defense, if any.
    */
@@ -43,12 +44,11 @@ export type ScryfallCardFace = {
   /**
    *  An object providing URIs to imagery for this face, if this is a double-sided card. If this card is not double-sided, then the image_uris property will be part of the parent object instead.
    */
-  image_uris?: ScryfallImageUris
+  image_uris?: ScryfallImageUrisType
   /**
    *  The layout of this card face, if the card is reversible.
    */
-  // TODO: Create correct type
-  layout?: string
+  layout?: ScryfallLayoutType
   /**
    *  This face’s loyalty, if any.
    */

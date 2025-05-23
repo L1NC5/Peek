@@ -1,3 +1,6 @@
-import type { ScryfallImageSize } from '@/types/Scryfall/Card/values/ImageSize.ts'
+import type { ScryfallImageSizeType } from '@/types/Scryfall/Card/values/ImageSize.ts'
 
-export type ScryfallImageUris = Record<ScryfallImageSize, string>
+/**
+ * URIs for various image sizes of this card.
+ */
+export type ScryfallImageUrisType = Record<ScryfallImageSizeType, string>
