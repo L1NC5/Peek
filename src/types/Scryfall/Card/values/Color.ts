@@ -1,3 +1,6 @@
+/**
+ * The game's existing colors
+ */
 export const ScryfallColor = {
   White: 'W',
   Blue: 'U',
