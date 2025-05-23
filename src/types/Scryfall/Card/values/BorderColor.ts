@@ -7,7 +7,7 @@ export const ScryfallBorderColor = {
   Borderless: 'borderless',
   Silver: 'silver',
   Gold: 'gold',
-}
+} as const
 
 export type ScryfallBorderColor =
   (typeof ScryfallBorderColor)[keyof typeof ScryfallBorderColor]

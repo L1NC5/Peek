@@ -1,2 +1,4 @@
 export * from './BorderColor'
 export * from './Color'
+export * from './ImageSize'
+export * from './ImageUris.ts'

@@ -1,5 +1,8 @@
 import type { ScryfallObject } from '@/types/Scryfall/Object'
-import type { ScryfallColor } from '@/types/Scryfall/Card/values'
+import type {
+  ScryfallColor,
+  ScryfallImageUris,
+} from '@/types/Scryfall/Card/values'
 
 /**
  * Multiface cards have a `card_faces` property containing at least two Card Face objects.
@@ -40,8 +43,7 @@ export type ScryfallCardFace = {
   /**
    *  An object providing URIs to imagery for this face, if this is a double-sided card. If this card is not double-sided, then the image_uris property will be part of the parent object instead.
    */
-  // TODO: Create correct type
-  image_uris?: string
+  image_uris?: ScryfallImageUris
   /**
    *  The layout of this card face, if the card is reversible.
    */

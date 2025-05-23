@@ -1,11 +1,5 @@
 /**
  * Type defining all possible object types in the Scryfall API
- *
- * @example
- * // Get the type of a specific kind of object
- * list = ScryfallObject.List
- * // Get the union of all types
- * object = ScryfallObject
  */
 export const ScryfallObject = {
   Card: 'card',
