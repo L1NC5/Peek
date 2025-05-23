@@ -1,9 +1,12 @@
+import type { ScryfallObject } from '@/types/Scryfall/Object'
+import type { ScryfallColor } from '@/types/Scryfall/Card/values'
+
 export type ScryfallCardFace = {
   artist?: string
   artist_id?: string
   cmc?: number
-  color_indicator?: Array<string>
-  colors?: Array<string>
+  color_indicator?: Array<ScryfallColor>
+  colors?: Array<ScryfallColor>
   defense?: string
   flavor_text?: string
   illustration_id?: string
@@ -12,7 +15,7 @@ export type ScryfallCardFace = {
   loyalty?: string
   mana_cost: string
   name: string
-  object: string
+  object: typeof ScryfallObject.CardFace
   oracle_id?: string
   oracle_text?: string
   power?: string
