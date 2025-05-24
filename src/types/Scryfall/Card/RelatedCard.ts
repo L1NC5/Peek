@@ -3,7 +3,7 @@ import type { ScryfallObject } from '@/types/Scryfall/Object'
 /**
  * Cards that are closely related to other cards (because they call them by name, or generate a token, or meld, etc) have a `all_parts` property that contains Related Card objects.
  */
-export type RelatedCard = {
+export type ScryfallRelatedCard = {
   /**
    *  An unique ID for this card in Scryfall’s database.
    */
