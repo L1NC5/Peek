@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Peek.iml" filepath="$PROJECT_DIR$/.idea/Peek.iml" />
-      <module fileurl="file://$USER_HOME$/Documents/Progetti/Personal/scryfall-api-types/api-types/.idea/api-types.iml" filepath="$USER_HOME$/Documents/Progetti/Personal/scryfall-api-types/api-types/.idea/api-types.iml" />
     </modules>
   </component>
 </project>
