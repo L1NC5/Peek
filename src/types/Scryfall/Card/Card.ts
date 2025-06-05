@@ -157,7 +157,7 @@ export type ScryfallCard = {
   /**
    *  The Oracle text for this card, if any.
    */
-  orecle_text?: string
+  oracle_text?: string
   /**
    *  This card’s rank/popularity on Penny Dreadful. Not all cards are ranked.
    */
