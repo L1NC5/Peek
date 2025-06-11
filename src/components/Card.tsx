@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { CardService } from '@/services/Scryfall/CardService.ts'
+import { ScryfallCardService } from '@/services/Scryfall/Card/ScryfallCardService.ts'
 
 export const Card: React.FC = () => {
   const cardQuery = useQuery({
     queryKey: ['card'],
     queryFn: () =>
-      CardService.GetByUUID('56ebc372-aabd-4174-a943-c7bf59e5028d'),
+      ScryfallCardService.GetByName({ name: 'Snapcaster', method: 'fuzzy' }),
     staleTime: 1000 * 60 * 5,
   })
 
@@ -26,8 +26,12 @@ export const Card: React.FC = () => {
           alt={cardQuery.data.name}
         />
         <div className={'flex flex-col max-w-80'}>
-          <h1 className={'text-3xl font-bold'}>{cardQuery.data.name}</h1>
-          <span className={'text-sm'}>{cardQuery.data.type_line}</span>
+          <h1 className={'text-3xl font-bold'}>
+            {cardQuery.data.printed_name || cardQuery.data.name}
+          </h1>
+          <span className={'text-sm'}>
+            {cardQuery.data.printed_type_line || cardQuery.data.type_line}
+          </span>
           <span className={'mt-4 text-lg whitespace-pre-line '}>
             {cardQuery.data.printed_text || cardQuery.data.oracle_text}
           </span>
