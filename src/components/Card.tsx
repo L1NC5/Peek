@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
+import type { ScryfallCard, ScryfallError } from '@/types/Scryfall'
 import { ScryfallCardService } from '@/services/Scryfall/Card/ScryfallCardService.ts'
 
 export const Card: React.FC = () => {
-  const cardQuery = useQuery({
+  const cardQuery = useQuery<ScryfallCard, ScryfallError>({
     queryKey: ['card'],
-    queryFn: () =>
-      ScryfallCardService.GetByName({ name: 'Snapcaster', method: 'fuzzy' }),
+    queryFn: () => ScryfallCardService.GetByCardmarketID({id: 379041}),
     staleTime: 1000 * 60 * 5,
   })
 
@@ -15,7 +15,7 @@ export const Card: React.FC = () => {
   }
 
   if (cardQuery.isError) {
-    return <div>{`Error fetching card: ${cardQuery.error.name}`}</div>
+    return <div>{`Error while fetching card: ${cardQuery.error.message}`}</div>
   }
   if (cardQuery.data) {
     return (
