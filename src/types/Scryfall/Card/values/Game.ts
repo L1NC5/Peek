@@ -13,7 +13,7 @@ export const ScryfallGame = {
    * Magic: the Gathering Online
    * Released in 2002.
    */
-  MTGO: 'MTGO',
+  MTGO: 'mtgo',
   /**
    * Magic: the Gathering: Arena
    * Released in 2018.

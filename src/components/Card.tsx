@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import type { ScryfallCard, ScryfallError } from '@/types/Scryfall'
-import { ScryfallCardService } from '@/services/Scryfall/Card/ScryfallCardService.ts'
+import { ScryfallCardService } from '@/services/Scryfall'
 
 export const Card: React.FC = () => {
   const cardQuery = useQuery<ScryfallCard, ScryfallError>({

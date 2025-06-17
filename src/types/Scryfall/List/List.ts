@@ -1,17 +1,14 @@
-import type {
-  ScryfallObject,
-  ScryfallObjectType,
-} from '@/types/Scryfall/Object'
+import type { ScryfallBaseObject } from '@/types/Scryfall'
 
-export type ScryfallList = {
+export type ScryfallList<TContent extends ScryfallBaseObject> = {
   /**
    *  A content type for this object
    */
-  object: typeof ScryfallObject.List
+  object: 'list'
   /**
    *  An array of the requested objects, in a specific order.
    */
-  data: Array<ScryfallObjectType>
+  data: Array<TContent>
   /**
    *  True if this List is paginated and there is a page beyond the current page.
    */
@@ -21,7 +18,7 @@ export type ScryfallList = {
    *
    *  You may submit a HTTP `GET` request to that URI to continue paginating forward on this List.
    */
-  next_page?: 'string'
+  next_page?: 'string' | null
   /**
    *  If this is a list of Card objects, this field will contain the total number of cards found across all pages.
    */

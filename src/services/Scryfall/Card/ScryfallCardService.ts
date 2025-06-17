@@ -105,7 +105,9 @@ export class ScryfallCardService {
     page?: number
     format?: TFormat
     pretty?: boolean
-  }): Promise<TFormat extends 'json' ? ScryfallList : Array<string>> {
+  }): Promise<
+    TFormat extends 'json' ? ScryfallList<ScryfallCard> : Array<string>
+  > {
     const {
       q,
       unique,
@@ -119,7 +121,7 @@ export class ScryfallCardService {
       pretty,
     } = options
     const response: AxiosResponse<
-      TFormat extends 'json' ? ScryfallList : Array<string>
+      TFormat extends 'json' ? ScryfallList<ScryfallCard> : Array<string>
     > = await axios.get(`${this.BASE_URL}/search`, {
       params: {
         q,

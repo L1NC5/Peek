@@ -19,7 +19,7 @@ export const ScryfallImageSize = {
    * Size: Approx 60kb
    * Filetype: JPG
    */
-  Medium: 'medium',
+  Normal: 'normal',
   /**
    * A large image.
    *

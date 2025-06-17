@@ -71,7 +71,7 @@ export type ScryfallCard = {
   /**
    *  A unique ID for this card’s oracle identity. This value is consistent across reprinted card editions, and unique among different cards with the same name (tokens, Unstable variants, etc). Always present except for the reversible_card layout where it will be absent; oracle_id will be found on each face instead.
    */
-  oracle_id?: number
+  oracle_id?: string
   /**
    *  A link to where you can begin paginating all re/prints for this card on Scryfall’s API.
    */
@@ -211,7 +211,7 @@ export type ScryfallCard = {
   /**
    *  This card’s collector number. Note that collector numbers can contain non-numeric characters, such as letters or ★.
    */
-  collection_number: string
+  collector_number: string
   /**
    *  True if you should consider avoiding use of this print downstream.
    */
@@ -224,6 +224,14 @@ export type ScryfallCard = {
    *  An array of computer-readable flags that indicate if this card can come in foil, nonfoil, or etched finishes.
    */
   finishes: Array<ScryfallFinishType>
+  /**
+   * @deprecated Indicates if the card is foil
+   */
+  foil?: boolean
+  /**
+   * @deprecated Indicates if the card is nonfoil
+   */
+  nonfoil?: boolean
   /**
    *  The just-for-fun name printed on the card (such as for Godzilla series cards).
    */
@@ -367,5 +375,5 @@ export type ScryfallCard = {
   /**
    *  This card's preview data
    */
-  preview: ScryfallPreviewType
+  preview?: ScryfallPreviewType
 }

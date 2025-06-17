@@ -24,3 +24,12 @@ export const ScryfallObject = {
  */
 export type ScryfallObjectType =
   (typeof ScryfallObject)[keyof typeof ScryfallObject]
+
+/**
+ * Interface defining a base object, extended by every other object in the api
+ *
+ * Mainly used to define list objects correctly
+ */
+export interface ScryfallBaseObject {
+  object: ScryfallObjectType
+}
