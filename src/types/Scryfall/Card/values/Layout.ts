@@ -61,3 +61,56 @@ export const ScryfallLayout = {
  */
 export type ScryfallLayoutType =
   (typeof ScryfallLayout)[keyof typeof ScryfallLayout]
+
+/**
+ * Groupings of layouts
+ */
+export const ScryfallLayoutGroup = {
+  /**
+   * All layouts that represent a single-faced card (no card_faces property)
+   */
+  SingleFaced: [
+    ScryfallLayout.Normal,
+    ScryfallLayout.Meld,
+    ScryfallLayout.Leveler,
+    ScryfallLayout.Class,
+    ScryfallLayout.Saga,
+    ScryfallLayout.Mutate,
+    ScryfallLayout.Prototype,
+    ScryfallLayout.Battle,
+    ScryfallLayout.Planar,
+    ScryfallLayout.Scheme,
+    ScryfallLayout.Vanguard,
+    ScryfallLayout.Token,
+    ScryfallLayout.Emblem,
+    ScryfallLayout.Augment,
+    ScryfallLayout.Host,
+  ] as const,
+
+  /**
+   * Multi-faced cards with both faces on the front
+   */
+  SingleSided: [
+    ScryfallLayout.Split,
+    ScryfallLayout.Flip,
+    ScryfallLayout.Adventure,
+  ] as const,
+
+  /**
+   * Multi-faced cards with front/back faces
+   */
+  DoubleSidedSplit: [
+    ScryfallLayout.Transform,
+    ScryfallLayout.ModalDfc,
+    ScryfallLayout.DoubleFacedToken,
+    ScryfallLayout.ArtSeries,
+  ] as const,
+}
+
+/**
+ * Type defining layout group types
+ *
+ * @see ScryfallLayoutGroup
+ */
+export type ScryfallLayoutGroupType = typeof ScryfallLayoutGroup
+

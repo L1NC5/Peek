@@ -1,10 +1,8 @@
 import type { ScryfallObject } from '@/types/Scryfall/Object'
-import type {
-  ScryfallCardFace,
-  ScryfallRelatedCard,
-} from '@/types/Scryfall/Card'
+import type { ScryfallPreviewType } from '@/types/Scryfall/Card/values/Preview.ts'
 import type {
   ScryfallBorderColorType,
+  ScryfallCardFace,
   ScryfallColorType,
   ScryfallFinishType,
   ScryfallFrameEffectType,
@@ -12,17 +10,20 @@ import type {
   ScryfallImageStatusType,
   ScryfallImageUrisType,
   ScryfallLanguageCodeType,
+  ScryfallLayoutGroup,
   ScryfallLayoutType,
   ScryfallLegalitiesFieldType,
   ScryfallPricesType,
   ScryfallPurchaseUrisType,
   ScryfallRarityType,
+  ScryfallRelatedCard,
   ScryfallRelatedUrisType,
   ScryfallSecurityStampType,
-} from '@/types/Scryfall/Card/values'
-import type { ScryfallPreviewType } from '@/types/Scryfall/Card/values/Preview.ts'
+} from '@/types/Scryfall/Card'
 
-export type ScryfallCard = {
+export type ScryfallCard<
+  TLayout extends ScryfallLayoutType = ScryfallLayoutType,
+> = {
   // ========================== CORE FIELDS ==========================
   /**
    *  This card’s Arena ID, if any. A large percentage of cards are not available on Arena and do not have this ID.
@@ -67,7 +68,7 @@ export type ScryfallCard = {
   /**
    *  A code for this card’s layout.
    */
-  layout: ScryfallLayoutType
+  layout: TLayout
   /**
    *  A unique ID for this card’s oracle identity. This value is consistent across reprinted card editions, and unique among different cards with the same name (tokens, Unstable variants, etc). Always present except for the reversible_card layout where it will be absent; oracle_id will be found on each face instead.
    */
@@ -94,10 +95,6 @@ export type ScryfallCard = {
    *  If this card is closely related to other cards, this property will be an array with Related Card Objects.
    */
   all_parts?: Array<ScryfallRelatedCard>
-  /**
-   *  An array of Card Face objects, if this card is multifaced.
-   */
-  card_faces?: Array<ScryfallCardFace>
   /**
    *  The card’s mana value. Note that some funny cards have fractional mana costs.
    */
@@ -204,10 +201,6 @@ export type ScryfallCard = {
    * This card’s border color
    */
   border_color: ScryfallBorderColorType
-  /**
-   * The Scryfall ID for the card back design present on this card.
-   */
-  card_back_id: string
   /**
    *  This card’s collector number. Note that collector numbers can contain non-numeric characters, such as letters or ★.
    */
@@ -376,4 +369,16 @@ export type ScryfallCard = {
    *  This card's preview data
    */
   preview?: ScryfallPreviewType
-}
+} & (TLayout extends (typeof ScryfallLayoutGroup.DoubleSidedSplit)[number]
+  ? {
+      /**
+       *  An array of Card Face objects, if this card is multifaced.
+       */
+      card_faces: Array<ScryfallCardFace>
+    }
+  : {
+      /**
+       *  The Scryfall ID for the card back design present on this card.
+       */
+      card_back_id: string
+    })
