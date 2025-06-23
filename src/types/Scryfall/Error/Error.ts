@@ -10,7 +10,7 @@ export type ScryfallError = {
   /**
    *  A human-readable string explaining the error.
    */
-  message: string
+  details: string
   /**
    *  A computer-friendly string that provides additional context for the main error.
    *  For example, an endpoint many generate `HTTP 404` errors for different kinds of input.
