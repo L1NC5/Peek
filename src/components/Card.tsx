@@ -1,42 +1,46 @@
 import * as React from 'react'
-import { useQuery } from '@tanstack/react-query'
-import type { ScryfallCard, ScryfallError, ScryfallList } from '@/types/Scryfall'
-import { ScryfallCardService } from '@/services/Scryfall'
+import type { ScryfallCard, ScryfallError } from '@/types/Scryfall'
+import type { UseQueryResult } from '@tanstack/react-query'
 
-export const Card: React.FC = () => {
-  const cardQuery = useQuery<ScryfallList<ScryfallCard>, ScryfallError>({
-    queryKey: ['card', { q: 'Snapcaster' }],
-    queryFn: () => ScryfallCardService.GetBySearch({ q: 'Snapcaster' }),
-    staleTime: 1000 * 60 * 5,
-  })
+export interface CardProps {
+  card: UseQueryResult<ScryfallCard, ScryfallError>
+}
 
-  if (cardQuery.isLoading) {
+export const Card: React.FC<CardProps> = ({ card }) => {
+  if (card.isLoading) {
     return <div>Loading...</div>
   }
 
-  if (cardQuery.isError) {
-    return <div>{`Error while fetching card: ${cardQuery.error.details}`}</div>
+  if (card.isError) {
+    return <div>{`Error while fetching card: ${card.error.details}`}</div>
   }
-  if (cardQuery.data) {
+
+  if (card.data) {
     return (
       <div className={'p-8 bg-slate-800 flex items-start gap-4 rounded-lg'}>
         <img
-          src={cardQuery.data.image_uris?.png}
+          src={card.data.image_uris?.png}
           className={'w-52'}
-          alt={cardQuery.data.name}
+          alt={card.data.name}
         />
         <div className={'flex flex-col max-w-80'}>
           <h1 className={'text-3xl font-bold'}>
-            {cardQuery.data.printed_name || cardQuery.data.name}
+            {card.data.printed_name || card.data.name}
           </h1>
           <span className={'text-sm'}>
-            {cardQuery.data.printed_type_line || cardQuery.data.type_line}
+            {card.data.printed_type_line || card.data.type_line}
           </span>
           <span className={'mt-4 text-lg whitespace-pre-line '}>
-            {cardQuery.data.printed_text || cardQuery.data.oracle_text}
+            {card.data.printed_text || card.data.oracle_text}
           </span>
         </div>
       </div>
     )
   }
+
+  return (
+    <div>
+      <span>No card data available</span>
+    </div>
+  )
 }
