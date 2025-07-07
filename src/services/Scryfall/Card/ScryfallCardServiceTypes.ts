@@ -1,7 +1,8 @@
 import type {
   ScryfallCard,
   ScryfallImageSizeType,
-  ScryfallLanguageCodeType, ScryfallList,
+  ScryfallLanguageCodeType,
+  ScryfallList,
 } from '@/types/Scryfall'
 
 /**
@@ -26,7 +27,7 @@ export interface ScryfallCardReturnFormatMap {
 export type ScryfallCardReturnFormat = keyof ScryfallCardReturnFormatMap
 
 /**
- * Interface mapping the possible return types provided by the GetBySearch method
+ * Interface mapping the possible return types provided by the `getBySearch` method
  *
  * Use in conjunction with generics and `ScryfallCardListReturnFormat` for correct type inference
  * @see ScryfallCardListReturnFormat
@@ -38,7 +39,7 @@ export interface ScryfallCardListReturnFormatMap {
 }
 
 /**
- * Type defining all return types provided by the GetBySearch method
+ * Type defining all return types provided by the `getBySearch` method
  *
  * Use in conjunction with generics and `ScryfallCardListReturnFormatMap` for correct type inference
  * @see ScryfallCardReturnFormatMap
@@ -46,8 +47,8 @@ export interface ScryfallCardListReturnFormatMap {
 export type ScryfallCardListReturnFormat = keyof ScryfallCardListReturnFormatMap
 
 /**
- * Type defining all possible `unique` modes that can be used in the `GetBySearch` method
- * @see ScryfallCardService.GetBySearch
+ * Type defining all possible `unique` modes that can be used in the `getBySearch` method
+ * @see ScryfallCardService.getBySearch
  */
 export type ScryfallSearchUniqueModesType =
   | 'cards' // Removes duplicate gameplay objects (cards that share a name and have the same functionality).
@@ -55,8 +56,8 @@ export type ScryfallSearchUniqueModesType =
   | 'prints' // Returns all prints for all cards matched (disables rollup).
 
 /**
- * All possible order values for GetBySearch method
- * @see ScryfallCardService.GetBySearch
+ * All possible order values for `getBySearch` method
+ * @see ScryfallCardService.getBySearch
  */
 export type ScryfallSearchOrderType =
   | 'name' // Sort cards by name, A → Z
@@ -75,7 +76,7 @@ export type ScryfallSearchOrderType =
   | 'artist' // Sort cards by front-side artist name: A → Z
   | 'review' // Sort cards how podcasts review sets, usually color & CMC, lowest → highest, with Booster Fun cards at the end
 
-export interface GetBySearchParams {
+export interface ScryfallGetBySearchParams {
   /** The search query string, following Scryfall's search syntax. */
   q: string
   /** The strategy to handle card duplicates. One of `cards`, `art` or `prints`. Default is `cards` */
@@ -97,9 +98,9 @@ export interface GetBySearchParams {
 }
 
 /**
- * Parameters used by the GetByName method.
+ * Parameters used by the `getByName` method.
  *
- * @see ScryfallCardService.GetByName
+ * @see ScryfallCardService.getByName
  * */
 export interface GetByNameParams extends GetSingleCardParams {
   /** The card name to search for. */
@@ -113,7 +114,7 @@ export interface GetByNameParams extends GetSingleCardParams {
 /**
  * Parameters used by the GetRandom method.
  *
- * @see ScryfallCardService.GetRandom
+ * @see ScryfallCardService.getRandom
  */
 export interface GetRandomParams extends GetSingleCardParams {
   /** Fulltext search query to filter the random pool. */
@@ -123,7 +124,7 @@ export interface GetRandomParams extends GetSingleCardParams {
 /**
  * Parameters used by the GetBySetNumber method.
  *
- * @see ScryfallCardService.GetBySetNumber
+ * @see ScryfallCardService.getBySetNumber
  */
 export interface GetBySetNumberParams extends GetSingleCardParams {
   /** The set code (e.g., 'znr', 'm21'). */
@@ -139,7 +140,7 @@ export interface GetBySetNumberParams extends GetSingleCardParams {
  *
  * @see ScryfallCardService.GetByID
  */
-export interface GetByIDParams extends GetSingleCardParams {
+export interface GetCardByIDParams extends GetSingleCardParams {
   /** The ID type to look for */
   type: 'multiverse' | 'mtgo' | 'arena' | 'tcgplayer' | 'cardmarket' | 'uuid'
   /** The ID of the card to fetch */
@@ -158,9 +159,42 @@ interface GetSingleCardParams {
   pretty?: boolean
 }
 
+/**
+ * Interface defining all props assignable to the `getAucocomplete` method
+ *
+ * @see ScryfallCardService.getAutocomplete
+ */
 export interface GetAutocompleteParams {
   /** The partial input string used for the autocomplete search. */
   q: string
   /** Whether to include extra card types (tokens, planes, vanguards, etc.). */
   extras?: boolean
 }
+
+/**
+ * Interface defining all props assignable to the `postCollection` method
+ */
+export interface PostCollectionParams {
+  /**
+   * An array of JSON objects, each one a card identifier.
+   * */
+  identifiers: Array<CardIdentifiers>
+  /** If `true`, prettifies the JSON response (avoid in production). */
+  pretty?: boolean
+}
+
+/**
+ * Type defining all identifier combinations that can be used as `identifiers` in the `postCollection` method.
+ */
+export type CardIdentifiers =
+  | { id: ScryfallCard['id'] }
+  | { mtgo_id: ScryfallCard['mtgo_id'] }
+  | { multiverse_id: ScryfallCard['multiverse_ids'] }
+  | { oracle_id: ScryfallCard['oracle_id'] }
+  | { illustration_id: ScryfallCard['illustration_id'] }
+  | { name: ScryfallCard['name'] }
+  | { name: ScryfallCard['name']; set: ScryfallCard['set'] }
+  | {
+      set: ScryfallCard['set']
+      collector_number: ScryfallCard['collector_number']
+    }

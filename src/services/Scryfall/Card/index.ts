@@ -1,2 +1,2 @@
 export * from './ScryfallCardService'
-// export * from './test'
+export * from './ScryfallCardServiceTypes'
