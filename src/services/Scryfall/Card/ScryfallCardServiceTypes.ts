@@ -130,7 +130,7 @@ export interface GetBySetNumberParams extends GetSingleCardParams {
   /** The set code (e.g., 'znr', 'm21'). */
   code: string
   /** The card's collector number within the set. */
-  number: number
+  number: string
   /** Optional language code for the card. Defaults to English if omitted. */
   lang?: ScryfallLanguageCodeType
 }
@@ -144,7 +144,7 @@ export interface GetCardByIDParams extends GetSingleCardParams {
   /** The ID type to look for */
   type: 'multiverse' | 'mtgo' | 'arena' | 'tcgplayer' | 'cardmarket' | 'uuid'
   /** The ID of the card to fetch */
-  id: string
+  id: string | number
 }
 
 /**
@@ -157,6 +157,8 @@ interface GetSingleCardParams {
   version?: ScryfallImageSizeType
   /** If `true`, prettifies the JSON response (avoid in production). */
   pretty?: boolean
+  /** The response format, defaults to `'json'`. */
+  format?: ScryfallCardReturnFormat
 }
 
 /**

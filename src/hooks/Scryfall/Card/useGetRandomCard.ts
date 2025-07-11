@@ -20,7 +20,7 @@ import { ScryfallCardService } from '@/services/Scryfall'
 export const useGetRandomCard = <
   TFormat extends ScryfallCardReturnFormat = 'json',
 >(
-  options: GetRandomParams,
+  options?: GetRandomParams,
   queryOptions?: UseQueryOptions<
     ScryfallCardReturnFormatMap[TFormat],
     ScryfallError
