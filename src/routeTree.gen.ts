@@ -8,20 +8,47 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as CardsSetCollectorNumberLangRouteImport } from './routes/cards/$set.$collectorNumber.$lang'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-
-// Create/Update Routes
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
+const CardsSetCollectorNumberLangRoute =
+  CardsSetCollectorNumberLangRouteImport.update({
+    id: '/cards/$set/$collectorNumber/$lang',
+    path: '/cards/$set/$collectorNumber/$lang',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/cards/$set/$collectorNumber/$lang': typeof CardsSetCollectorNumberLangRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/cards/$set/$collectorNumber/$lang': typeof CardsSetCollectorNumberLangRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/cards/$set/$collectorNumber/$lang': typeof CardsSetCollectorNumberLangRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/cards/$set/$collectorNumber/$lang'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/cards/$set/$collectorNumber/$lang'
+  id: '__root__' | '/' | '/cards/$set/$collectorNumber/$lang'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  CardsSetCollectorNumberLangRoute: typeof CardsSetCollectorNumberLangRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
@@ -29,60 +56,23 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cards/$set/$collectorNumber/$lang': {
+      id: '/cards/$set/$collectorNumber/$lang'
+      path: '/cards/$set/$collectorNumber/$lang'
+      fullPath: '/cards/$set/$collectorNumber/$lang'
+      preLoaderRoute: typeof CardsSetCollectorNumberLangRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
-}
-
-// Create and export the route tree
-
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CardsSetCollectorNumberLangRoute: CardsSetCollectorNumberLangRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
