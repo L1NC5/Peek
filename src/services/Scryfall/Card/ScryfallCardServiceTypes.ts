@@ -76,7 +76,7 @@ export type ScryfallSearchOrderType =
   | 'artist' // Sort cards by front-side artist name: A → Z
   | 'review' // Sort cards how podcasts review sets, usually color & CMC, lowest → highest, with Booster Fun cards at the end
 
-export interface ScryfallGetBySearchParams {
+export interface GetBySearchParams {
   /** The search query string, following Scryfall's search syntax. */
   q: string
   /** The strategy to handle card duplicates. One of `cards`, `art` or `prints`. Default is `cards` */
@@ -95,6 +95,8 @@ export interface ScryfallGetBySearchParams {
   page?: number
   /** Whether to pretty-print the JSON response (for readability, not recommended for production). */
   pretty?: boolean
+  /** The response format, defaults to `'json'`. */
+  format?: ScryfallCardListReturnFormat
 }
 
 /**
@@ -136,9 +138,9 @@ export interface GetBySetNumberParams extends GetSingleCardParams {
 }
 
 /**
- * Parameters used by the GetByID method
+ * Parameters used by the getByID method
  *
- * @see ScryfallCardService.GetByID
+ * @see ScryfallCardService.getByID
  */
 export interface GetCardByIDParams extends GetSingleCardParams {
   /** The ID type to look for */

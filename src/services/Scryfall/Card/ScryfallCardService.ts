@@ -11,7 +11,7 @@ import type {
   ScryfallCardListReturnFormatMap,
   ScryfallCardReturnFormat,
   ScryfallCardReturnFormatMap,
-  ScryfallGetBySearchParams,
+  GetBySearchParams,
 } from '@/services/Scryfall'
 import type { ScryfallCard, ScryfallList } from '@/types/Scryfall'
 import { ScryfallErrorHandler } from '@/services/Scryfall'
@@ -123,7 +123,7 @@ export class ScryfallCardService {
   >(
     options: GetBySetNumberParams,
   ): Promise<ScryfallCardReturnFormatMap[TFormat]> {
-    const { code, number, lang, format, ...rest } = options
+    const { code, number, lang, format = 'json', ...rest } = options
     const langSegment = lang ? `/${lang}` : ''
 
     const response: AxiosResponse<ScryfallCardReturnFormatMap[TFormat]> =
@@ -161,7 +161,7 @@ export class ScryfallCardService {
   static async getBySearch<
     TFormat extends ScryfallCardListReturnFormat = 'json',
   >(
-    options: ScryfallGetBySearchParams,
+    options: GetBySearchParams,
   ): Promise<ScryfallCardListReturnFormatMap[TFormat]> {
     const response: AxiosResponse<ScryfallCardListReturnFormatMap[TFormat]> =
       await axios
