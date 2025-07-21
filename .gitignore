@@ -4,3 +4,5 @@ dist
 dist-ssr
 *.local
 .idea/vcs.xml
+.idea/compiler.xml
+.idea/dictionaries/project.xml

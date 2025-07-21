@@ -1,3 +1,16 @@
+import type {
+  ScryfallCard,
+  ScryfallCardFace,
+  ScryfallCardSymbol,
+  ScryfallCatalog,
+  ScryfallError,
+  ScryfallList,
+  ScryfallManaCost,
+  ScryfallRelatedCard,
+  ScryfallRuling,
+  ScryfallSet,
+} from '@/types/Scryfall'
+
 /**
  * Object defining all possible object types in the Scryfall API
  *
@@ -32,4 +45,18 @@ export type ScryfallObjectType =
  */
 export interface ScryfallBaseObject {
   object: ScryfallObjectType
+}
+
+export type ScryfallObjectTypeMap = {
+  [ScryfallObject.Card]: ScryfallCard
+  [ScryfallObject.CardFace]: ScryfallCardFace
+  [ScryfallObject.CardSymbol]: ScryfallCardSymbol
+  [ScryfallObject.Catalog]: ScryfallCatalog
+  [ScryfallObject.Error]: ScryfallError
+  [ScryfallObject.List]: ScryfallList<ScryfallBaseObject>
+  [ScryfallObject.ManaCost]: ScryfallManaCost
+  [ScryfallObject.Migration]: any // TODO: Define migration object
+  [ScryfallObject.RelatedCard]: ScryfallRelatedCard
+  [ScryfallObject.Ruling]: ScryfallRuling
+  [ScryfallObject.Set]: ScryfallSet
 }

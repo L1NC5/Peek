@@ -1,6 +1,6 @@
 import type { ScryfallObject } from '@/types/Scryfall/Object'
 
-export type Ruling = {
+export type ScryfallRuling = {
   object: typeof ScryfallObject.Ruling
   /**
    *  The Oracle ID of the card this ruling is associated with.
